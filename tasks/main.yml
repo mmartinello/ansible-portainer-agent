@@ -1,0 +1,29 @@
+---
+- name: Install Docker
+  ansible.builtin.import_role:
+    name: mmartinello.docker
+  when: portainer_agent_docker_install
+
+- name: Install Docker PIP package
+  ansible.builtin.pip:
+    name: "docker"
+    state: present
+
+- name: Create the Docker Compose project destination directory
+  ansible.builtin.file:
+    path: "{{ portainer_agent_install_dir }}"
+    state: directory
+    recurse: true
+
+- name: Create the Docker Compose configuration file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ portainer_agent_install_dir }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Start the Docker Compose project
+  community.docker.docker_compose:
+    project_src: "{{ portainer_agent_install_dir }}"
+    pull: "{{ portainer_agent_docker_pull }}"

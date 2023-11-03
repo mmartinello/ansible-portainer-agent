@@ -1,0 +1,27 @@
+---
+# Docker Compose project installation directory
+portainer_agent_install_dir: /opt/portainer-agent
+
+# Portainer Agent version to be installed
+portainer_agent_version: latest
+
+# Docker container restart policy
+portainer_agent_restart: always
+
+# Docker container external port
+portainer_agent_port: 9001
+
+# Pull the latest Docker image
+portainer_agent_docker_pull: true
+
+# Docker Compose service name
+portainer_agent_service_name: portainer-agent
+
+# Docker socket path
+portainer_agent_docker_socket_path: /var/run/docker.sock
+
+# Docker volumes path
+portainer_agent_docker_volumes_path: /var/lib/docker/volumes
+
+# Install Docker
+portainer_agent_docker_install: true
